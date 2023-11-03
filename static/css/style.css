@@ -1,0 +1,445 @@
+:root{
+    --textcolor: #d1c8dd;
+    --spangradcolor: #a7a0b1;
+    --darktextcolor: #7d7686;
+    --tdarktextcolor: #ada4b9a2;
+    --background: #2a252d;
+    --primary: #65476b;
+    --secondary: #534771;
+    --accent: #a265b8;
+    --xpanel-size: 20vw;
+    --ypanel-size: 25vw;
+}
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    color: var(--textcolor);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--background);
+}
+
+::-webkit-scrollbar{
+    background: var(--background);
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: radial-gradient(var(--accent),var(--secondary));
+}
+
+.backdrop{
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: -1;
+}
+
+.backdrop > #heading--backdrop{
+    position: absolute;
+    background: linear-gradient(var(--accent),var(--background));
+    border-radius: 50%;
+    width: 0%;
+    left: 50%;
+    top: 50%;
+    aspect-ratio: 1;
+    transform: translate(-50%,-50%);
+    opacity: 0.8;
+    animation: backdropenter 0.5s forwards 2s,headingbackanim 2s linear infinite alternate forwards 2.5s;
+}
+
+.backdrop > .heading--backdrop-over{
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(72px);
+}
+
+.heading{
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    font-size: 2.3rem;
+    overflow: hidden;
+    margin-bottom: 10rem;
+}
+
+.heading > .heading--text{
+    z-index: 1;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 1.5rem;
+    opacity: 1;
+}
+
+.heading > .heading--text>h1{
+    position: relative;
+    color: var(--textcolor);
+    letter-spacing: 0.05em;
+    transform: translateY(1rem);
+    opacity: 0;
+    font-weight: bold;
+    animation: titleanim2 0.5s linear forwards;
+}
+.heading > .heading--text>h1::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(var(--textcolor),var(--accent));
+    bottom: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: titleanim 1s forwards 0.5s;
+}
+
+.heading > .heading--text>div{
+    width:35%;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transform: translateY(1rem);
+    animation: titleanim2 0.5s linear forwards 1.5s;
+}
+.heading > .heading--text>div > p{
+    letter-spacing: 0.1em;
+    color: var(--textcolor);
+    text-shadow: 0px 2px 2px var(--tdarktextcolor);
+}
+.heading > .heading--text >div > .awesome{
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    text-shadow: 0px 2px 2px var(--tdarktextcolor);
+    margin-right: 0.4em;
+}
+
+.panels{
+    display: grid;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    grid-template-rows: var(--ypanel-size) var(--ypanel-size) var(--ypanel-size);
+    grid-template-columns: var(--xpanel-size) var(--xpanel-size) var(--xpanel-size);
+    gap: 1.5rem;
+    grid-template-areas:
+    'one one two'
+    'one one three'
+    'four four four';
+    margin-bottom: 10rem;
+}
+
+.panels > .panel-fig{
+    height: 100%;
+    width: 100%;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panels > .panel-fig > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 120%;
+    height: 120%;
+    backdrop-filter: blur(0);
+    background: linear-gradient(rgba(255,255,255,0),rgba(0,0,0, 1));
+    transition: backdrop-filter 0.1s;
+}
+
+.panels > .panel-fig > div > h2{
+    text-align: center;
+    font-size: 3.5em;
+    color: var(--textcolor);
+    letter-spacing: 0.05em;
+    text-shadow: 0px 2px 2px var(--tdarktextcolor);
+    transition: letter-spacing 0.2s;
+    display: flex;
+    align-items: bottom;
+}
+
+.panels > .panel-fig > div > p{
+    opacity: 0;
+    transform: translateY(-30%);
+    text-align: center;
+    font-size: 2em;
+    width:80%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--textcolor);
+    background-size: 200% auto;
+    letter-spacing: 0.02em;
+    text-shadow: 0px 0px 5px black;
+    transition: transform 0.2s, opacity 0.3s;
+    animation: spananim 3s linear infinite;
+}
+
+.panels > .panel-fig >div:hover{
+    backdrop-filter: blur(0px);
+}
+.panels > .panel-fig >div:hover > h2{
+    letter-spacing: 0.5rem;
+}
+.panels > .panel-fig >div:hover > p{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.panel-fig:nth-of-type(1) {
+    background: url(../img/keyboard.webp) center no-repeat;
+    background-size: cover;
+    grid-area: one;
+}
+
+.panel-fig:nth-of-type(2) {
+    background: url(../img/snacks.webp) center no-repeat;
+    background-size: cover;
+    grid-area: two;
+}
+
+.panel-fig:nth-of-type(3) {
+    background: url(../img/hangout.webp) center no-repeat;
+    background-size: cover;
+    grid-area: three;
+}
+
+.panel-fig:nth-of-type(4) {
+    background: url(../img/work.webp) center no-repeat;
+    background-size: cover;
+    grid-area: four;
+}
+
+.textsec{
+    padding: 0 3rem;
+    margin: 5rem 0;
+    width: 100%;
+    letter-spacing: 0.1em;
+    line-height: 1.2em;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.textsec > h2{
+    width: 50%;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.textsec > p{
+    width: 50%;
+}
+
+.about{
+    align-items: start;
+}
+
+.why{
+    align-items: end;
+}
+
+.questions{
+    margin: 30vh 0;
+    align-items: center;
+    text-align: center;
+}
+
+.questions > p > a{
+    letter-spacing: 0.05em;
+    color: var(--accent);
+}
+
+footer{
+    margin-top: 10vh;
+    bottom: 0px;
+    left: 0;
+    height: 10vh;
+    width: 100%;
+    background: var(--background);
+    filter: brightness(0.8);
+    display: flex;
+    justify-content: right;
+}
+
+footer > div{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    margin-right: 1rem;
+    line-height: 1.5em;
+    letter-spacing: 0.1em;
+}
+
+/*Animations*/
+@keyframes headingbackanim{
+    from{
+        filter: hue-rotate(0deg);
+        filter: brightness(1);
+    }
+    to{
+        filter: hue-rotate(30deg);
+        filter: brightness(1.3);
+        width: 25%;
+    }
+}
+
+@keyframes titleanim{
+    to{
+        width: 100%;
+    }
+}
+
+@keyframes titleanim2{
+    to{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes backdropenter{
+    to{
+        width: 20%;
+    }
+}
+
+@keyframes spananim{
+    to{
+        background-position: 200% center;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    :root{
+        --xpanel-size: 30vw;
+        --ypanel-size: 35vw;
+    }
+
+    .textsec >h2{
+        width: 70%;
+    }
+
+    .textsec > p{
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .panels{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .panels > .panel-fig{
+        width: 80%;
+        height: 60vw;
+        font-size: 1.5rem;
+    }
+
+    .textsec{
+        font-size: 1.5rem;
+    }
+
+    .textsec > h2{
+        width: 90%;
+    }
+
+    .textsec > p{
+        width: 90%;
+    }
+
+    .questions{
+        margin-bottom: 50vh;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .panels{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .panels > .panel-fig{
+        font-size: 1rem;
+    }
+    
+    .textsec{
+        font-size: 1.2rem;
+    }
+
+    .textsec > h2{
+        width: 100%;
+    }
+
+    .textsec > p{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .heading{
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .heading{
+        font-size: 1rem;
+    }
+
+    .panels{
+        display: flex;
+        flex-direction: column;
+    }
+    .panels > .panel-fig{
+        width: 100%;
+        height: 80vw;
+        font-size: 0.5rem;
+    }
+
+    .questions{
+        display: flex;
+        flex-direction: column;
+    }
+    .questions >p > a{
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+    }
+    .textsec{
+        padding: 0;
+        font-size: 0.9rem;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+    footer{
+        height: auto;
+    }
+    footer>div{
+        margin: 0;
+        text-align: center;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
+}
